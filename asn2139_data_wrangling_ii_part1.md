@@ -1,4 +1,4 @@
-asn2139\_data\_wrangling\_ii\_part1
+reading data from the web
 ================
 
 ``` r
@@ -35,4 +35,28 @@ library(rvest)
 
 ``` r
 library(httr)
+```
+
+\#\#Scrape a table
+
+I want the first table from
+
+read in the html
+
+``` r
+url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+
+drug_use_html=read_html(url)
+```
+
+extract the table(s)
+
+``` r
+table_marj=
+drug_use_html %>% 
+  html_nodes(css="table") %>% 
+  first() %>% 
+  html_table() %>% 
+  slice(-1) %>% 
+  as_tibble()
 ```

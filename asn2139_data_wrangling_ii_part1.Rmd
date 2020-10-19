@@ -97,3 +97,13 @@ brfss_2010=
 
 ```
 
+## Pokemon Data
+```{r}
+
+pokemon_data= 
+  GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
+
+pokemon_data$name
+```
+

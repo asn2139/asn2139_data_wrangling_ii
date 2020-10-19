@@ -65,5 +65,33 @@ string_vec = c(
 
 str_detect(string_vec, "7.11")
 ```
+```{r}
+string_vec = c(
+  'The CI is [2, 5]',
+  ':-]',
+  ':-[',
+  'I found the answer on pages [6-7]'
+  )
 
+str_detect(string_vec, "\\[")
+```
+
+## Factors
+
+```{r}
+factor_vec=factor(c("male", "female", "female", "female"))
+
+factor_vec
+
+as.numeric(factor_vec)
+```
+What happens if I relevel...
+
+```{r}
+factor_vec= fct_relevel(factor_vec, "male")
+
+factor_vec
+
+as.numeric(factor_vec)
+```
 

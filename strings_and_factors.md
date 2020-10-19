@@ -118,3 +118,50 @@ str_detect(string_vec, "7.11")
 ```
 
     ## [1]  TRUE  TRUE FALSE  TRUE
+
+``` r
+string_vec = c(
+  'The CI is [2, 5]',
+  ':-]',
+  ':-[',
+  'I found the answer on pages [6-7]'
+  )
+
+str_detect(string_vec, "\\[")
+```
+
+    ## [1]  TRUE FALSE  TRUE  TRUE
+
+## Factors
+
+``` r
+factor_vec=factor(c("male", "female", "female", "female"))
+
+factor_vec
+```
+
+    ## [1] male   female female female
+    ## Levels: female male
+
+``` r
+as.numeric(factor_vec)
+```
+
+    ## [1] 2 1 1 1
+
+What happens if I relevel…
+
+``` r
+factor_vec= fct_relevel(factor_vec, "male")
+
+factor_vec
+```
+
+    ## [1] male   female female female
+    ## Levels: male female
+
+``` r
+as.numeric(factor_vec)
+```
+
+    ## [1] 1 2 2 2

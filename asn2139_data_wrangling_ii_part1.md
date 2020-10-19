@@ -5,14 +5,14 @@ reading data from the web
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+    ## ── Attaching packages ───────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 
     ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
     ## ✓ tibble  3.0.3     ✓ dplyr   1.0.2
     ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
     ## ✓ readr   1.4.0     ✓ forcats 0.5.0
 
-    ## ── Conflicts ───────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -95,4 +95,31 @@ swm_df=
     tile=title_vec,
     gross_rev=gross_rev_vec,
     runtime=runtime_vec)
+```
+
+## Get some water data
+
+This is coming from an API
+
+``` r
+nyc_water=
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.csv") %>% 
+  content("parsed")
+```
+
+    ## 
+    ## ── Column specification ──────────────────────────────────────────────────────────────────────────────────────
+    ## cols(
+    ##   year = col_double(),
+    ##   new_york_city_population = col_double(),
+    ##   nyc_consumption_million_gallons_per_day = col_double(),
+    ##   per_capita_gallons_per_person_per_day = col_double()
+    ## )
+
+``` r
+nyc_water=
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.json") %>% 
+  content("text") %>% 
+  jsonlite::fromJSON() %>% 
+  as_tibble()
 ```

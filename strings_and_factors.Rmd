@@ -1,0 +1,5 @@
+---
+title: "strings_and_factors"
+output: github_document
+---
+

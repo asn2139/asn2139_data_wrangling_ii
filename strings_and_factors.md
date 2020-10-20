@@ -5,14 +5,14 @@ strings\_and\_factors
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.3.0 ──
+    ## ── Attaching packages ─────────────────────────── tidyverse 1.3.0 ──
 
     ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
     ## ✓ tibble  3.0.3     ✓ dplyr   1.0.2
     ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
     ## ✓ readr   1.4.0     ✓ forcats 0.5.0
 
-    ## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -165,3 +165,30 @@ as.numeric(factor_vec)
 ```
 
     ## [1] 1 2 2 2
+
+\#\#NSDUH
+
+``` r
+ url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+
+drug_use_html=read_html(url)
+
+table_marj=
+drug_use_html %>% 
+  html_nodes(css="table") %>% 
+  first() %>% 
+  html_table() %>% 
+  slice(-1) %>% 
+  as_tibble()
+```
+
+``` r
+data_marj=
+  table_marj %>% 
+  select(-contains("P Value")) %>% 
+  pivot_longer(
+    -State,
+    names_to="age_year",
+    values_to="percent"
+  ) 
+```
